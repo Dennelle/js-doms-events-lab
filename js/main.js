@@ -111,9 +111,14 @@ subMenuEl.style.position = '0';
 topMenuLinks = topMenuEl
 showingSubMenu = 0;
 
-//5.2 Attach a delegated 'click' event listener to topMenuEl. The first line of code of the event listener function should call the event object's preventDefault() method. The second line of code function should immediately return if the element clicked was not an <a> element. Hint: DOM elements have a tagName property.console.log the content of the <a> to verify the handler is working.
+//5.2 Attach a delegated 'click' event listener to topMenuEl.
+//The first line of code of the event listener function should call the event object's preventDefault() method.
+//The second line of code function should immediately return if the element clicked was not an <a> element. Hint: DOM elements have a tagName property.console.log the content of the <a> to verify the handler is working.
 
-//topMenuEl.addEventListener('click', )
+topMenuEl.addEventListener('click', (event) =>{
+  event.preventDefault()
+})
+
 
 //Progress Check Ensure that clicking ABOUT, CATALOG, etc. logs out about, catalog, etc. when a link is clicked Clicking anywhere other than on a link should do nothing thanks to the second line of code written in Task 5.2!
 
