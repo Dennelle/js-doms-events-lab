@@ -1,10 +1,21 @@
 // Task 3.0 Copy the following data structure to the top of script.js:
 const menuLinks = [
-    {text: 'about', href: '/about'},
-    {text: 'catalog', href: '/catalog'},
-    {text: 'orders', href: '/orders'},
-    {text: 'account', href: '/account'},
-  ];
+  {text: 'about', href: '/about'},
+  {text: 'catalog', href: '#', subLinks: [
+    {text: 'all', href: '/catalog/all'},
+    {text: 'top selling', href: '/catalog/top'},
+    {text: 'search', href: '/catalog/search'},
+  ]},
+  {text: 'orders', href: '#' , subLinks: [
+    {text: 'new', href: '/orders/new'},
+    {text: 'pending', href: '/orders/pending'},
+    {text: 'history', href: '/orders/history'},
+  ]},
+  {text: 'account', href: '#', subLinks: [
+    {text: 'profile', href: '/account/profile'},
+    {text: 'sign out', href: '/account/signout'},
+  ]},
+];
 
 //Task 1.0 Select and cache the <main> element in a variable named mainEl.
 const mainEl = document.querySelector("main")
@@ -91,12 +102,18 @@ subMenuEl.classList.add('flex-around')
 subMenuEl.style.position = 'absolute';
 
 //4.5 Set the CSS top property of subMenuEl to the value of 0.
+subMenuEl.style.position = '0';
 
 //5.0 Replace the menuLinks array in script.js with this version that adds sub-menu data:
 
 //5.1 Select and cache all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.Declare a global showingSubMenu variable and initialize it to false;
 
+topMenuLinks = topMenuEl
+showingSubMenu = 0;
+
 //5.2 Attach a delegated 'click' event listener to topMenuEl. The first line of code of the event listener function should call the event object's preventDefault() method. The second line of code function should immediately return if the element clicked was not an <a> element. Hint: DOM elements have a tagName property.console.log the content of the <a> to verify the handler is working.
+
+//topMenuEl.addEventListener('click', )
 
 //Progress Check Ensure that clicking ABOUT, CATALOG, etc. logs out about, catalog, etc. when a link is clicked Clicking anywhere other than on a link should do nothing thanks to the second line of code written in Task 5.2!
 
