@@ -89,56 +89,67 @@ const topMenuLinks = document.querySelectorAll('#top-menu a');
 //Declare a global showingSubMenu variable and initialize it to false;√
 let showingSubMenu = false;
 
-//5.2 Attach a delegated 'click' event listener to topMenuEl.√
-//The first line of code of the event listener function should call the event object's preventDefault() method.√
-//The second line of code function should immediately return if the element clicked was not an <a> element. Hint: DOM elements have a tagName property.console.log the content of the <a> to verify the handler is working.√
-
+// Task 5.2
 topMenuEl.addEventListener('click', function(evt) {
-evt.preventDefault();
-console.log(evt.target);
-const link = evt.target;
-if( link.tagName !=='a') return;
-console.log(link.textContent);
+  evt.preventDefault();
+  const link = evt.target;
+  if (link.tagName !== 'A') return;
+  console.log(link.textContent);
+  // Task 5.3
+  if (link.classList.contains('active')) {
+    link.classList.remove('active');
+    showingSubMenu = false;
+    subMenuEl.style.top = '0';
+    return;
+  }
+  // Task 5.4
+  topMenuLinks.forEach(function(link) {
+    link.classList.remove('active');
+  });
+  // Task 5.5
+  link.classList.add('active');
+  // Task 5.6
+  const linkData = menuLinks.find(function(linkObj) {
+    return linkObj.text === link.textContent;
+  });
+  showingSubMenu = 'subLinks' in linkData;
+  // Task 6.4
+  // Task 5.7
+  if (showingSubMenu) {
+    buildSubMenu(linkData.subLinks);
+    subMenuEl.style.top = '100%';
+  } else {
+    subMenuEl.style.top = '0';
+    mainEl.innerHTML = '<h1>about</h1>';
+  }
 });
 
-//Progress Check Ensure that clicking ABOUT, CATALOG, etc. logs out about, catalog, etc. when a link is clicked Clicking anywhere other than on a link should do nothing thanks to the second line of code written in Task 5.2!
-
-//Task 5.3 This feature "deselects" the menu item if it's clicked when it's currently active, resulting in the sub-menu sliding up as well.
-
-//Next in the event listener, if the clicked <a> link has a class of active: Remove the active class from the clicked <a> element.√ Set the showingSubMenu to false.√ Set the CSS top property of subMenuEl to 0.√ return; from the event listener function.√
-
-if(link.classList.contains('active')) {
-  link.classList.remove('active');
-  showingSubMenu = false;
-  subMenuEl.style.top = '0';
-  return;
+// Task 5.8
+function buildSubMenu(subLinks) {
+  subMenuEl.innerHTML = '';
+  subLinks.forEach(function(link) {
+    const linkEl = document.createElement('a');
+    linkEl.setAttribute('href', link.href);
+    linkEl.textContent = link.text;
+    subMenuEl.appendChild(linkEl);
+  });
 }
 
-//Task 5.4 At this point, a new menu item has been clicked and it's time to "reset" any currently active menu item...Add code to the bottom of the the event listener that iterates over each <a> element in topMenuLinks and removes the class name of active, regardless of whether the <a> element has a class of active or not.
+// Task 6.0
+subMenuEl.addEventListener('click', function(evt) {
+  evt.preventDefault();
+  const link = evt.target;
+  if (link.tagName !== 'A') return;
+  console.log(link.textContent);
+  // Task 6.1
+  showingSubMenu = false;
+  subMenuEl.style.top = '0';
+  // Task 6.2
+  topMenuLinks.forEach(function(link) {
+    link.classList.remove('active');
+  });
+  // Task 6.3
+  mainEl.innerHTML = `<h1>${link.textContent}</h1>`;
+});
 
-//Hint: Removing a non-existent class from an element does not cause an error, so just remove it!
 
-
-
-
-
-//Task 5.5 Next, the event listener should add a class name of active to the <a> element that was clicked.
-
-//Task 5.6 Next, add code in the event listener that sets showingSubMenu to true if the clicked <a> element's "link" object within menuLinks has a subLinks property (all do, except for the "link" object for ABOUT), otherwise, set it to false.
-
-//Hint: Saving the "link" object in a variable will come in handy for passing its subLinks array in Task 5.7
-
-//Progress Check Clicking any of the links should make that link "active" and clear the others: Clicking an "active" link should clear that link.
-
-//Task 5.7 Next in the event listener...If showingSubMenu is true:Call a buildSubMenu function passing to it the subLinks array for the clicked <a> element. Set the CSS top property of subMenuEl to 100%. Otherwise (showingSubMenu is false):Set the CSS top property of subMenuEl to 0.Since the About link has been clicked, set mainEl.innerHTML to '<h1>about</h1>'.
-//Task 5.8 Code the buildSubMenu function so that it:Clears the contents of subMenuEl. Iterates over the subLinks array passed as an argument; and for each "link" object: Create an <a> element. On the new element, add an href attribute with its value set to the href property of the "link" object. Set the new element's content to the value of the text property of the "link" object. Append the new element to the subMenuEl element.Progress Check. Take the menu for a test drive!
-
-//Task 6.0 Attach a delegated 'click' event listener to subMenuEl. The first line of code of the event listener function should call the event object's preventDefault() method.
-
-//The second line of code function should immediately return if the element clicked was not an <a> element. console.log the content of the <a> to verify the handler is working.
-
-//Task 6.1 Next, subMenuEl's event listener should: Set showingSubMenu to false. Set the CSS top property of subMenuEl to 0.
-
-//Task 6.2 Next, subMenuEl's event listener should remove the class name of active from each <a> element in topMenuLinks - whether the active class exists or not.
-
-//Task 6.3 Next, subMenuEl's event listener should update the contents of mainEl to the contents of the <a> element, within an <h1>, clicked within subMenuEl.
