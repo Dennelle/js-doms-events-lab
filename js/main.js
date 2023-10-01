@@ -89,16 +89,20 @@ const topMenuLinks = document.querySelectorAll('#top-menu a');
 //Declare a global showingSubMenu variable and initialize it to false;√
 let showingSubMenu = false;
 
-// Task 5.2
+//5.2 Attach a delegated 'click' event listener to topMenuEl.The first line of code of the event listener function should call the event object’s preventDefault() method.√ The second line of code function should immediately return if the element clicked was not an <a> element.√ Hint: DOM elements have a tagName property. console.log the content of the <a> to verify the handler is working.
+
 topMenuEl.addEventListener('click', function(evt) {
   evt.preventDefault();
   const link = evt.target;
   if (link.tagName !== 'A') return;
   console.log(link.textContent);
-  // Task 5.3
+
+  // 5.3 This feature “deselects” the menu item if it’s clicked when it’s currently active resulting in the sub-menu sliding up as well. Next in the event listener, if the clicked <a> link has a class of active: Remove the active class from the clicked <a> element.√
   if (link.classList.contains('active')) {
     link.classList.remove('active');
+      // Set the showingSubMenu to false.√
     showingSubMenu = false;
+    // return; from the event listener function.
     subMenuEl.style.top = '0';
     return;
   }
@@ -151,5 +155,3 @@ subMenuEl.addEventListener('click', function(evt) {
   // Task 6.3
   mainEl.innerHTML = `<h1>${link.textContent}</h1>`;
 });
-
-
