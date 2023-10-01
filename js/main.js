@@ -55,72 +55,64 @@ topMenuEl.classList.add('flex-around')
 //console.log(anchorEl)√
 // Append the new element to the topMenuEl element.
 
-menuLinks.forEach(function (link) {
+menuLinks.forEach(function(link) {
   const linkEl = document.createElement('a');
   linkEl.setAttribute('href', link.href);
   linkEl.textContent = link.text;
-  console.log(topMenuEl)
   topMenuEl.appendChild(linkEl);
-  });
+});
 
-//4.0 Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
+//4.0 Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.√
 const subMenuEl = document.querySelector('#sub-menu');
-//Set the height subMenuEl element to be 100%.
+
+//4.1 Set the height subMenuEl element to be 100%. √
 subMenuEl.style.height = '100%';
 //console.log(subMenuEl)
 
-//4.2 Set the background color of subMenuEl using the --sub-menu-bg CSS custom property.
+//4.2 Set the background color of subMenuEl using the --sub-menu-bg CSS custom property. √
 subMenuEl.style.backgroundColor = 'var(--sub-menu-bg)';
 
-//4.3 Add the class of flex-around to the subMenuEl element.
-subMenuEl.classList.add('flex-around')
+//4.3 Add the class of flex-around to the subMenuEl element. √
+subMenuEl.classList.add('flex-around');
 
-//4.4 Set the CSS position property of subMenuEl to the value of absolute.
+//4.4 Set the CSS position property of subMenuEl to the value of absolute. √
 subMenuEl.style.position = 'absolute';
 
-//4.5 Set the CSS top property of subMenuEl to the value of 0.
-subMenuEl.style.position = '0';
+//4.5 Set the CSS top property of subMenuEl to the value of 0.√
+subMenuEl.style.top = '0';
 
-//5.0 Replace the menuLinks array in script.js with this version that adds sub-menu data:
+//5.0 Replace the menuLinks array in script.js with this version that adds sub-menu data. √
 
-//5.1 Select and cache all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.Declare a global showingSubMenu variable and initialize it to false;
-
+//5.1 Select and cache all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.√
 const topMenuLinks = document.querySelectorAll('#top-menu a');
-const showingSubMenu = false;
+
+//Declare a global showingSubMenu variable and initialize it to false;√
+let showingSubMenu = false;
 
 //5.2 Attach a delegated 'click' event listener to topMenuEl.√
-
-topMenuEl.addEventListener('click', (evt) =>{
-  evt.preventDefault()
-
-});
 //The first line of code of the event listener function should call the event object's preventDefault() method.√
+//The second line of code function should immediately return if the element clicked was not an <a> element. Hint: DOM elements have a tagName property.console.log the content of the <a> to verify the handler is working.√
 
-//The second line of code function should immediately return if the element clicked was not an <a> element. Hint: DOM elements have a tagName property.console.log the content of the <a> to verify the handler is working.
-
-//**why would I create another link event.target?
-topMenuEl.addEventListener('click', (evt) =>{
-  evt.preventDefault()
-  if (link.tagName !=='A')
-  return; console.log(link.textContent)
-})
-
-//topMenuEl.addEventListener('click', function(evt) {
- // evt.preventDefault();
-  //const link = evt.target;
-  //if (link.tagName !== 'A') return;
-  //console.log(link.textContent);
+topMenuEl.addEventListener('click', function(evt) {
+evt.preventDefault();
+console.log(evt.target);
+const link = evt.target;
+if( link.tagName !=='a') return;
+console.log(link.textContent);
+});
 
 //Progress Check Ensure that clicking ABOUT, CATALOG, etc. logs out about, catalog, etc. when a link is clicked Clicking anywhere other than on a link should do nothing thanks to the second line of code written in Task 5.2!
 
-//Task 5.3 This feature "deselects" the menu item if it's clicked when it's currently active, resulting in the sub-menu sliding up as well.Next in the event listener, if the clicked <a> link has a class of active: Remove the active class from the clicked <a> element. Set the showingSubMenu to false. Set the CSS top property of subMenuEl to 0. return; from the event listener function.
+//Task 5.3 This feature "deselects" the menu item if it's clicked when it's currently active, resulting in the sub-menu sliding up as well.
 
-// this is the css below:
-//  nav a.active {
-//  background-color: var(--sub-menu-bg);
-//  color: var(--main-bg);
-//}
+//Next in the event listener, if the clicked <a> link has a class of active: Remove the active class from the clicked <a> element.√ Set the showingSubMenu to false.√ Set the CSS top property of subMenuEl to 0.√ return; from the event listener function.√
 
+if(link.classList.contains('active')) {
+  link.classList.remove('active');
+  showingSubMenu = false;
+  subMenuEl.style.top = '0';
+  return;
+}
 
 //Task 5.4 At this point, a new menu item has been clicked and it's time to "reset" any currently active menu item...Add code to the bottom of the the event listener that iterates over each <a> element in topMenuLinks and removes the class name of active, regardless of whether the <a> element has a class of active or not.
 
