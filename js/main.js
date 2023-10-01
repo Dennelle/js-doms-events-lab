@@ -17,67 +17,51 @@ const menuLinks = [
   ]},
 ];
 
-//Task 1.0 Select and cache the <main> element in a variable named mainEl.
+//Task 1.0 Select and cache the <main> element in a variable named mainEl.√
 const mainEl = document.querySelector("main")
 //console.log(mainEl)
 
-// Task 1.1
-// Set the background color of mainEl using the --main-bg CSS custom property.
-// Hint: Assign a string that uses the CSS var() function like this:
-// 'var(--main-bg)'
+// Task 1.1 Set the background color of mainEl using the --main-bg CSS custom property. Hint: Assign a string that uses the CSS var() function like this:'var(--main-bg)' √
 mainEl.style.backgroundColor = 'var(--main-bg)'
 
 // Task 1.2
-// Set the content of mainEl to <h1>SEI Rocks!</h1>.
+// Set the content of mainEl to <h1>SEI Rocks!</h1>.√
 const h1 = document.createElement('h1')
 h1.textContent = 'SEI Rocks!'
 mainEl.appendChild(h1)
 //console.log(h1)
 
-// Task 1.3
-// Add a class of flex-ctr to mainEl.
-// Hint: Element.classList API
+// Task 1.3 Add a class of flex-ctr to mainEl. Hint: Element.classList API √
 
 mainEl.classList.add('flex-ctr')
 //console.log(mainEl)
 mainEl.style.textAlign = 'center'
 
-// Task 2.0
-// Select and cache the <nav id="top-menu"> element in a variable named topMenuEl.
+// Task 2.0 - Select and cache the <nav id="top-menu"> element in a variable named topMenuEl.√
 const topMenuEl = document.querySelector('#top-menu')
 //console.log(topMenuEl);
 
-// Task 2.1
-// Set the height topMenuEl element to be 100%.
+// Task 2.1 - Set the height topMenuEl element to be 100%. √
 topMenuEl.style.height = "100%"
 
-// Task 2.2
-// Set the background color of topMenuEl using the --top-menu-bg CSS custom property.
+// Task 2.2 - Set the background color of topMenuEl using the --top-menu-bg CSS custom property. √
 topMenuEl.style.backgroundColor = 'var(--top-menu-bg)'
 
-// Task 2.3
-// Add a class of flex-around to topMenuEl.
+// Task 2.3 - Add a class of flex-around to topMenuEl.√
 topMenuEl.classList.add('flex-around')
 
-// Task 3.1
-// Iterate over the entire menuLinks array and for each "link" object:
-// Create an <a> element.
-
-// On the new element, add an href attribute with its value set to the href property of the "link" object.
+// Task 3.1 - Iterate over the entire menuLinks array and for each "link" object: Create an <a> element. √ On the new element, add an href attribute with its value set to the href property of the "link" object.√
+// Set the new element's content to the value of the text property of the "link" object.√
+//console.log(anchorEl)√
+// Append the new element to the topMenuEl element.
 
 menuLinks.forEach(function (link) {
-  let anchorEl = document.createElement('a');
-  anchorEl.textContent = link.text;
-  anchorEl.setAttribute('href', link.href);
-  // Set the new element's content to the value of the text property of the "link" object.
-  //console.log(anchorEl)
- // Append the new element to the topMenuEl element.
-topMenuEl.append(anchorEl);
-console.log(topMenuEl)
+  const linkEl = document.createElement('a');
+  linkEl.setAttribute('href', link.href);
+  linkEl.textContent = link.text;
+  console.log(topMenuEl)
+  topMenuEl.appendChild(linkEl);
   });
-
-  //link to lab 2
-//  https://git.generalassemb.ly/SEI-CC/sei-9-25/blob/main/Unit_1/04-dom/4.2.1-dom-menu-lab-part-2.md
 
 //4.0 Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
 const subMenuEl = document.querySelector('#sub-menu');
@@ -101,17 +85,22 @@ subMenuEl.style.position = '0';
 
 //5.1 Select and cache all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.Declare a global showingSubMenu variable and initialize it to false;
 
-topMenuLinks = topMenuEl
-showingSubMenu = 0;
+const topMenuLinks = document.querySelectorAll('#top-menu a');
+const showingSubMenu = false;
 
-//5.2 Attach a delegated 'click' event listener to topMenuEl.
-//The first line of code of the event listener function should call the event object's preventDefault() method.
+//5.2 Attach a delegated 'click' event listener to topMenuEl.√
+
+topMenuEl.addEventListener('click', (evt) =>{
+  evt.preventDefault()
+
+});
+//The first line of code of the event listener function should call the event object's preventDefault() method.√
+
 //The second line of code function should immediately return if the element clicked was not an <a> element. Hint: DOM elements have a tagName property.console.log the content of the <a> to verify the handler is working.
 
 //**why would I create another link event.target?
-topMenuEl.addEventListener('click', (event) =>{
-  event.preventDefault()
-  const link = event.target;
+topMenuEl.addEventListener('click', (evt) =>{
+  evt.preventDefault()
   if (link.tagName !=='A')
   return; console.log(link.textContent)
 })
@@ -132,19 +121,12 @@ topMenuEl.addEventListener('click', (event) =>{
 //  color: var(--main-bg);
 //}
 
-const anchorlLinksEl = document.querySelectorAll('.nav a');
-anchorlLinksEl.forEach(anchorlLinkEl => {
-document.querySelector('.active').classList.remove('active')
-});
-
-showingSubMenu = false;
-subMenuEl.style.zindex = '0';
 
 //Task 5.4 At this point, a new menu item has been clicked and it's time to "reset" any currently active menu item...Add code to the bottom of the the event listener that iterates over each <a> element in topMenuLinks and removes the class name of active, regardless of whether the <a> element has a class of active or not.
 
 //Hint: Removing a non-existent class from an element does not cause an error, so just remove it!
 
- 
+
 
 
 
