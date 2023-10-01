@@ -63,13 +63,6 @@ topMenuEl.classList.add('flex-around')
 // Iterate over the entire menuLinks array and for each "link" object:
 // Create an <a> element.
 
-// const menuLinks = [
-//   {text: 'about', href: '/about'},
-//   {text: 'catalog', href: '/catalog'},
-//   {text: 'orders', href: '/orders'},
-//   {text: 'account', href: '/account'},
-// ];
-
 // On the new element, add an href attribute with its value set to the href property of the "link" object.
 
 menuLinks.forEach(function (link) {
@@ -80,7 +73,7 @@ menuLinks.forEach(function (link) {
   //console.log(anchorEl)
  // Append the new element to the topMenuEl element.
 topMenuEl.append(anchorEl);
-//console.log(topMenuEl)
+console.log(topMenuEl)
   });
 
   //link to lab 2
@@ -115,18 +108,45 @@ showingSubMenu = 0;
 //The first line of code of the event listener function should call the event object's preventDefault() method.
 //The second line of code function should immediately return if the element clicked was not an <a> element. Hint: DOM elements have a tagName property.console.log the content of the <a> to verify the handler is working.
 
+//**why would I create another link event.target?
 topMenuEl.addEventListener('click', (event) =>{
   event.preventDefault()
+  const link = event.target;
+  if (link.tagName !=='A')
+  return; console.log(link.textContent)
 })
 
+//topMenuEl.addEventListener('click', function(evt) {
+ // evt.preventDefault();
+  //const link = evt.target;
+  //if (link.tagName !== 'A') return;
+  //console.log(link.textContent);
 
 //Progress Check Ensure that clicking ABOUT, CATALOG, etc. logs out about, catalog, etc. when a link is clicked Clicking anywhere other than on a link should do nothing thanks to the second line of code written in Task 5.2!
 
 //Task 5.3 This feature "deselects" the menu item if it's clicked when it's currently active, resulting in the sub-menu sliding up as well.Next in the event listener, if the clicked <a> link has a class of active: Remove the active class from the clicked <a> element. Set the showingSubMenu to false. Set the CSS top property of subMenuEl to 0. return; from the event listener function.
 
+// this is the css below:
+//  nav a.active {
+//  background-color: var(--sub-menu-bg);
+//  color: var(--main-bg);
+//}
+
+const anchorlLinksEl = document.querySelectorAll('.nav a');
+anchorlLinksEl.forEach(anchorlLinkEl => {
+document.querySelector('.active').classList.remove('active')
+});
+
+showingSubMenu = false;
+subMenuEl.style.zindex = '0';
+
 //Task 5.4 At this point, a new menu item has been clicked and it's time to "reset" any currently active menu item...Add code to the bottom of the the event listener that iterates over each <a> element in topMenuLinks and removes the class name of active, regardless of whether the <a> element has a class of active or not.
 
 //Hint: Removing a non-existent class from an element does not cause an error, so just remove it!
+
+ 
+
+
 
 //Task 5.5 Next, the event listener should add a class name of active to the <a> element that was clicked.
 
