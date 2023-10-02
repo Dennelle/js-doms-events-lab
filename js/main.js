@@ -119,7 +119,7 @@ topMenuEl.addEventListener('click', function(evt) {
 
   link.classList.add('active');
 
-  // Task 5.6 Next, add code in the event listener that sets showingSubMenu to true if the clicked <a> element’s “link” object within menuLinks has a subLinks property (all do, except for the “link” object for ABOUT), otherwise, set it to false. Hint: Saving the “link” object in a variable will come in handy for passing its subLinks array in Task 5.7.
+  // Task 5.6 Next, add code in the event listener that sets showingSubMenu to true if the clicked <a> element’s “link” object within menuLinks has a subLinks property (all do, except for the “link” object for ABOUT), otherwise, set it to false. Hint: Saving the “link” object in a variable will come in handy for passing its subLinks array in Task 5.7.√
 
   //Saving the “link” object in a variable will come in handy for passing its subLinks array in Task 5.7.√
   const linkData = menuLinks.find(function(linkObj) {
@@ -138,67 +138,58 @@ if (showingSubMenu) {
    }
  });
 
+ // Task 5.8 Code the buildSubMenu function so that it:
+ //Clears the contents of subMenuEl.
+// Iterates over the subLinks array passed as an argument; and for each “link” object:
+// Create an <a> element.
+//On the new element, add an href attribute with its value set to the href property of the “link” object.
+//Set the new element’s content to the value of the text property of the “link” object.
+//Append the new element to the subMenuEl element.
 
+// function subMenuEl()
+// subMenuEl.innerText ='';√
 
+// subLinks.forEach(function(linkObj){
+// document.createElement = 'a';
+// a.add('href', linkObj)
 
+// setAttribute(a, linkObj);
+// a.textContent = linkObj;
+// a.appendChild.subMenuEl;
+// })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // Task 5.8
-// function buildSubMenu(subLinks) {
-//   subMenuEl.innerHTML = '';
-//   subLinks.forEach(function(link) {
-//     const linkEl = document.createElement('a');
-//     linkEl.setAttribute('href', link.href);
-//     linkEl.textContent = link.text;
-//     subMenuEl.appendChild(linkEl);
-//   });
 // }
 
-// // Task 6.0
-// subMenuEl.addEventListener('click', function(evt) {
-//   evt.preventDefault();
-//   const link = evt.target;
-//   if (link.tagName !== 'A') return;
-//   console.log(link.textContent);
-//   // Task 6.1
-//   showingSubMenu = false;
-//   subMenuEl.style.top = '0';
-//   // Task 6.2
-//   topMenuLinks.forEach(function(link) {
-//     link.classList.remove('active');
-//   });
-//   // Task 6.3
-//   mainEl.innerHTML = `<h1>${link.textContent}</h1>`;
-// });
+function buildSubMenu(subLinks) {
+  subMenuEl.innerHTML = '';
+  subLinks.forEach(function(link) {
+    const linkEl = document.createElement('a');
+    linkEl.setAttribute('href', link.href);
+    linkEl.textContent = link.text;
+    subMenuEl.appendChild(linkEl);
+  });
+}
+
+// Task 6.0 Attach a delegated ‘click’ event listener to subMenuEl. The first line of code of the event listener function should call the event object’s preventDefault() method. The second line of code function should immediately return if the element clicked was not an <a> element. console.log the content of the <a> to verify the handler is working.√
+
+subMenuEl.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  const link = evt. target;
+  if (link.tagName !== 'A') return;
+    console.log(link.textContent);
+});
+
+// Task 6.1 Next, subMenuEl’s event listener should: Set showingSubMenu to false. Set the CSS top property of subMenuEl to 0.
+  showingSubMenu = false;
+  subMenuEl.style.top = '0';
+
+// Task 6.2 Next, subMenuEl’s event listener should remove the class name of active from each <a> element in topMenuLinks - whether the active class exists or not.
+
+  topMenuLinks.forEach(function(link) {
+  link.classList.remove('active');
+
+
+//Task 6.3 Next, subMenuEl’s event listener should update the contents of mainEl to the contents of the <a> element, within an <h1>, clicked within subMenuEl.
+
+mainEl.innerHTML = `<h1>${link.textContent}</h1>`;
+});
